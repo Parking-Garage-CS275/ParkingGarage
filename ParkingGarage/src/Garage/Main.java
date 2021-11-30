@@ -1,10 +1,9 @@
-package GUI;
+package Garage;
 
 
 
-import GUI.PGarage;
-import GUI.start;
-import GUI.CalculateCost;
+import Garage.start;
+import Garage.CalculateCost;
 import java.io.FileNotFoundException;  // Import this class to handle errors
 import java.util.ArrayList;
 

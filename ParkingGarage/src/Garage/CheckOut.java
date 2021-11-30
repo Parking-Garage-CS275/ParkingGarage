@@ -1,8 +1,8 @@
-package GUI;
+package Garage;
 
 
-import GUI.CheckIn.*;
-import static GUI.CheckIn.a;
+import Garage.CheckIn.*;
+import static Garage.CheckIn.a;
 import java.util.*;
 
 /*
@@ -20,7 +20,7 @@ public class CheckOut extends javax.swing.JFrame {
     
     /**
      * Creates new form CheckOut
-     */ Time T1 = new Time();
+     */ //Time T1 = new Time();
         int checkIN = 0;
         int checkOut = 0;
         double duration = 0;
