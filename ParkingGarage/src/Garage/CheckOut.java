@@ -20,10 +20,7 @@ public class CheckOut extends javax.swing.JFrame {
     
     /**
      * Creates new form CheckOut
-     */ //Time T1 = new Time();
-        int checkIN = 0;
-        int checkOut = 0;
-        double duration = 0;
+     */ 
     public CheckOut() {
         initComponents();
    
@@ -187,7 +184,7 @@ public class CheckOut extends javax.swing.JFrame {
         // TODO add your handling code here:
         int D1 =  Integer.parseInt(txtDate1.getText());
         
-        this.checkIN = D1;
+        
     }//GEN-LAST:event_txtDate1ActionPerformed
 
     private void btnPayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPayActionPerformed
@@ -203,12 +200,7 @@ public class CheckOut extends javax.swing.JFrame {
             }
         }*/
 
-        this.duration =  T1.Duration(checkIN,checkOut);
-
-        txtDate1.setText("");
-        //txtDate2.setText("");
-        new start().setVisible(true);
-        dispose();
+        
 
     }//GEN-LAST:event_btnPayActionPerformed
 
