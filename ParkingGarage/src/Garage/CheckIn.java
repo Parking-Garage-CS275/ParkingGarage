@@ -1,22 +1,15 @@
 package Garage;
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
-
-/**
- *
- * @author Owner
- */
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import javax.swing.JOptionPane;
+import Garage.Main;
 
 public class CheckIn extends javax.swing.JFrame {
-
+    
+    Connect Main.main.db;
+    
     // create 2D array. Rows wil be A-E, columns 1-9
     // if someone selects B3 then its [1][2] (i think)
     public static String [][] garage = new String[5][10];
