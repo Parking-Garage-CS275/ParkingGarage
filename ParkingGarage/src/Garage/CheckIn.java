@@ -8,7 +8,8 @@ import Garage.Main;
 
 public class CheckIn extends javax.swing.JFrame {
     
-    Connect Main.main.db;
+    //TODO:
+    //Connect Main.main.db;
     
     // create 2D array. Rows wil be A-E, columns 1-9
     // if someone selects B3 then its [1][2] (i think)
