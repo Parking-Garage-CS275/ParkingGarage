@@ -11,21 +11,25 @@ public class CheckIn extends javax.swing.JFrame {
     //TODO:
     //Connect Main.main.db;
     
-    // create 2D array. Rows wil be A-E, columns 1-9
+    // create 2D array. Rows wil be A-E, columns 1-9 (I DONT THINK WE ACTUALLY NEED THIS ANYMORE BECAUSE WE USE DATABASE)
     // if someone selects B3 then its [1][2] (i think)
     public static String [][] garage = new String[5][10];
+    
+    // create an arraylist for each floor that will be used for the combo box displays
     public static ArrayList<String> a = new ArrayList<String>();
     public static ArrayList<String> b = new ArrayList<String>();
     public static ArrayList<String> c = new ArrayList<String>();
     public static ArrayList<String> d = new ArrayList<String>();
     public static ArrayList<String> e = new ArrayList<String>();
-    // arraylist holding the spots filled by vehicles
+    // arraylist holding the spots filled by vehicles for the combo box displays
     public static ArrayList<String> leave = new ArrayList<String>();
+    
     public static String selectedValue = "";
     public static String floor;
     public static String spotNumeral;
     public static String takenSpot = "X";
     public static int counter = 0;
+    // counters for each floor to display how many spots are available for each floor
     public static int counterA = 9;
     public static int counterB = 9;
     public static int counterC = 9;
@@ -37,14 +41,14 @@ public class CheckIn extends javax.swing.JFrame {
      */
     public CheckIn() {
         initComponents();
-        
+        // display amount of spots available for each floor
         jLabel1.setText(String.valueOf(counterA));
         jLabel2.setText(String.valueOf(counterB));
         jLabel3.setText(String.valueOf(counterC));
         jLabel4.setText(String.valueOf(counterD));
         jLabel5.setText(String.valueOf(counterE));
                 
-        
+        // this fills the combo box displays, and counter is so that it only fills the arrays the first time
         if (counter == 0){
         for(int i = 0; i < 9; i++) {
             a.add("A" + String.valueOf(i + 1));
@@ -63,17 +67,20 @@ public class CheckIn extends javax.swing.JFrame {
         } 
         counter++;
         }
+        // display the spots in the combo boxes
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(a.toArray()));
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(b.toArray()));
         jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(c.toArray()));
         jComboBox4.setModel(new javax.swing.DefaultComboBoxModel(d.toArray()));
         combSpot.setModel(new javax.swing.DefaultComboBoxModel(e.toArray()));
         
+        // this is the 2d array I created that I think we won't need because the database replaces it
         for (int i = 0; i < 5; i++){
             for (int k = 0; k <9; k++){
                 garage[i][k] = "-";
             }
         }
+        // this is the combo box for the unavailable spots
         jComboBox5.setModel(new javax.swing.DefaultComboBoxModel(leave.toArray()));
     }
 
@@ -323,6 +330,7 @@ public class CheckIn extends javax.swing.JFrame {
 
     private void combSpotActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combSpotActionPerformed
         // TODO add your handling code here:
+        // set the variable selected value to whatever value the customer most recently picked from the combo boxes
         selectedValue = combSpot.getSelectedItem().toString();
         lblSelectedSpot.setText(selectedValue);
     }//GEN-LAST:event_combSpotActionPerformed
@@ -339,10 +347,11 @@ public class CheckIn extends javax.swing.JFrame {
         // get the selected spot
         selectedValue = lblSelectedSpot.getText();
         // split the spot into the floor and number, then fill the spot in the 2D array
-        
         floor = selectedValue.substring(0, 1);
         spotNumeral = selectedValue.substring(1);
         
+        // floorInt and spotInt are so that we can remove the chosen spot from the display combob box
+        // basically it converts "A1" or "B3" into "01" or "13"
         int floorInt = 0;
         int spotInt = 0;
             if (null != floor) 
@@ -406,6 +415,7 @@ public class CheckIn extends javax.swing.JFrame {
         garage[floorInt][spotInt] = takenSpot;
         // remove the spot from the array/combo box
         //switch (floorInt) {
+        // if floor is A, find the spot chosen and remove it from combo box, etc for floors below
             if (floorInt == 0){
                 Iterator itr = a.iterator();
                     while (itr.hasNext()) {
@@ -461,7 +471,6 @@ public class CheckIn extends javax.swing.JFrame {
                         }
                     }       combSpot.setModel(new javax.swing.DefaultComboBoxModel(e.toArray()));
                 }
-        // write loop here calling sort method to add selectedValue tothe arraylist in correct order
         leave.add(selectedValue);
         Collections.sort(leave);  
         lblSelectedSpot.setText(selectedValue);
@@ -478,24 +487,28 @@ public class CheckIn extends javax.swing.JFrame {
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
+        // set the variable selected value to whatever value the customer most recently picked from the combo boxes
         selectedValue = jComboBox1.getSelectedItem().toString();
         lblSelectedSpot.setText(selectedValue);
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
     private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
         // TODO add your handling code here:
+        // set the variable selected value to whatever value the customer most recently picked from the combo boxes
         selectedValue = jComboBox2.getSelectedItem().toString();
         lblSelectedSpot.setText(selectedValue);
     }//GEN-LAST:event_jComboBox2ActionPerformed
 
     private void jComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox3ActionPerformed
         // TODO add your handling code here:
+        // set the variable selected value to whatever value the customer most recently picked from the combo boxes
         selectedValue = jComboBox3.getSelectedItem().toString();
         lblSelectedSpot.setText(selectedValue);
     }//GEN-LAST:event_jComboBox3ActionPerformed
 
     private void jComboBox4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox4ActionPerformed
         // TODO add your handling code here:
+        // set the variable selected value to whatever value the customer most recently picked from the combo boxes
         selectedValue = jComboBox4.getSelectedItem().toString();
         lblSelectedSpot.setText(selectedValue);
     }//GEN-LAST:event_jComboBox4ActionPerformed
