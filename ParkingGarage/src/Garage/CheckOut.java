@@ -1,15 +1,23 @@
 package Garage;
 
 
-import Garage.CheckIn.*;
-import static Garage.CheckIn.a;
 import java.util.*;
 import javax.swing.JOptionPane;
 
 public class CheckOut extends javax.swing.JFrame {
     
-    double totalCost = 0;
+    public static Connect database(){
+        Connect database = new Connect();
+        database.createNewDatabase();
+        database.createAccountTable();    
+        database.createSpotsTable();
+        database.createTakenSpotTable();
+        database.selectAllSpots();
+        return database;
+    }
     
+    double totalCost = 0;
+
     /**
      * Creates new form CheckOut
      */ 

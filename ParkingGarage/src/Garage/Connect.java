@@ -4,6 +4,7 @@ import java.sql.*;
 
 
 public class Connect {
+    public Connect db;
     /**
      * Sets up the connection to the database file to execute SQL code
      * 

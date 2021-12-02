@@ -4,12 +4,19 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import javax.swing.JOptionPane;
-import Garage.Main;
 
 public class CheckIn extends javax.swing.JFrame {
     
-    //TODO:
-    //Connect Main.main.db;
+    public static Connect database(){
+        Connect database = new Connect();
+        database.createNewDatabase();
+        database.createAccountTable();    
+        database.createSpotsTable();
+        database.createTakenSpotTable();
+        database.selectAllSpots();
+        return database;
+    }
+    
     
     // create 2D array. Rows wil be A-E, columns 1-9 (I DONT THINK WE ACTUALLY NEED THIS ANYMORE BECAUSE WE USE DATABASE)
     // if someone selects B3 then its [1][2] (i think)
@@ -40,6 +47,8 @@ public class CheckIn extends javax.swing.JFrame {
      * Creates new form CheckIn
      */
     public CheckIn() {
+        Connect db = database();
+        //db.insertAccount(floor, spotNumeral, PROPERTIES);
         initComponents();
         // display amount of spots available for each floor
         jLabel1.setText(String.valueOf(counterA));
