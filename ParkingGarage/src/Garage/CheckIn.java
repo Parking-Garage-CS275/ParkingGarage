@@ -47,15 +47,11 @@ public class CheckIn extends javax.swing.JFrame {
      * Creates new form CheckIn
      */
     public CheckIn() {
-        Connect db = database();
-        //db.insertAccount(floor, spotNumeral, PROPERTIES);
+        
+        
         initComponents();
         // display amount of spots available for each floor
-        jLabel1.setText(String.valueOf(counterA));
-        jLabel2.setText(String.valueOf(counterB));
-        jLabel3.setText(String.valueOf(counterC));
-        jLabel4.setText(String.valueOf(counterD));
-        jLabel5.setText(String.valueOf(counterE));
+        
                 
         // this fills the combo box displays, and counter is so that it only fills the arrays the first time
         if (counter == 0){
@@ -76,6 +72,43 @@ public class CheckIn extends javax.swing.JFrame {
         } 
         counter++;
         }
+        
+        Connect db = new Connect();
+        ArrayList<String> takenSpots = db.selectTakenSpots();
+        for(int i = 0; i < takenSpots.size(); i++){
+            String floorLetter = takenSpots.get(i).substring(0, 1);
+            String spotNum = takenSpots.get(i).substring(1);
+            if(floorLetter.equals("A")){
+                a.remove(takenSpots.get(i));
+                counterA--;
+            }
+            else if(floorLetter.equals("B")){
+                b.remove(takenSpots.get(i));
+                counterB--;
+            }
+            else if(floorLetter.equals("C")){
+                c.remove(takenSpots.get(i));
+                counterC--;
+            }
+            else if(floorLetter.equals("D")){
+                d.remove(takenSpots.get(i));
+                counterD--;
+            }
+            else if(floorLetter.equals("E")){
+                e.remove(takenSpots.get(i));
+                counterE--;
+            }
+        }
+        //TODO: UNAVIABLE SPOTS COMBO BOX
+        
+        
+        jLabel1.setText(String.valueOf(counterA));
+        jLabel2.setText(String.valueOf(counterB));
+        jLabel3.setText(String.valueOf(counterC));
+        jLabel4.setText(String.valueOf(counterD));
+        jLabel5.setText(String.valueOf(counterE));
+        
+        
         // display the spots in the combo boxes
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(a.toArray()));
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(b.toArray()));
@@ -359,6 +392,19 @@ public class CheckIn extends javax.swing.JFrame {
         floor = selectedValue.substring(0, 1);
         spotNumeral = selectedValue.substring(1);
         
+        Connect db = database();
+        
+        String name = txtName.getText();
+        String fname = name.substring(0, name.indexOf(' '));
+        String lname = name.substring(name.indexOf(' '));
+        //TODO: ACCOUNTS MULITPLYING 
+        
+        db.insertAccount(fname, lname, 0);
+        String date = txtDate.getText();
+        db.updateCheckInTime(selectedValue, date);
+        db.insertTakenSpot(db.selectAccountID(fname, lname),db.selectSpotID(selectedValue));
+        //jComboBox5.setModel(new javax.swing.DefaultComboBoxModel(e.toArray()));
+        
         // floorInt and spotInt are so that we can remove the chosen spot from the display combob box
         // basically it converts "A1" or "B3" into "01" or "13"
         int floorInt = 0;
@@ -431,7 +477,7 @@ public class CheckIn extends javax.swing.JFrame {
                         String x = (String)itr.next();
                         if (x.equals(selectedValue)){
                             itr.remove();
-                            counterA--;
+                            //counterA--;
                             jLabel1.setText(String.valueOf(counterA));
                         }
                     }       jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(a.toArray()));

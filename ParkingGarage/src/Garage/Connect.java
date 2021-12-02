@@ -1,7 +1,7 @@
 package Garage;
 
 import java.sql.*;
-
+import java.util.ArrayList;
 
 public class Connect {
     public Connect db;
@@ -155,7 +155,7 @@ public class Connect {
             ID = Integer.toString(rs.getInt("id"));
             
         } catch (SQLException e){
-            System.out.println(e.getMessage());
+            return 0;
         }
         return ID;
     }
@@ -478,7 +478,7 @@ public class Connect {
      */
     public String selectSpotID(String spotNum){
         String ID = "";
-        String sql = "SELECT ID FROM ACCOUNTS WHERE SpotNumber = ?";
+        String sql = "SELECT ID FROM SPOTS WHERE SpotNumber = ?";
         try(Connection conn = this.connect(); PreparedStatement pstmt  = conn.prepareStatement(sql)){
             pstmt.setString(1, spotNum);
             ResultSet rs = pstmt.executeQuery();
@@ -499,7 +499,7 @@ public class Connect {
      */
     public String selectCheckInTime(String spotNum){
         String CheckInTime = "";
-        String sql = "SELECT CheckInTime FROM ACCOUNTS WHERE SpotNumber = ?";
+        String sql = "SELECT CheckInTime FROM SPOTS WHERE SpotNumber = ?";
         try(Connection conn = this.connect(); PreparedStatement pstmt  = conn.prepareStatement(sql)){
             pstmt.setString(1, spotNum);
             ResultSet rs = pstmt.executeQuery();
@@ -518,11 +518,11 @@ public class Connect {
      * @param CheckInTime String, the time that the account checked in at.
      */
     public void updateCheckInTime(String spotNum, String CheckInTime){
-        String sql = "UPDATE ACCOUNTS SET CheckInTime = ? WHERE spotNum = ?";
+        String sql = "UPDATE SPOTS SET CheckInTime = ? WHERE SpotNumber = ?";
         try(Connection conn = this.connect(); PreparedStatement pstmt  = conn.prepareStatement(sql)){
-            pstmt.setString(1, CheckInTime);
+            pstmt.setString(1, "" + CheckInTime);
             pstmt.setString(2, spotNum);
-            pstmt.executeUpdate(sql);
+            pstmt.executeUpdate();
             
         } catch (SQLException e){
             System.out.println(e.getMessage());
@@ -567,6 +567,21 @@ public class Connect {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+    }
+    
+    public ArrayList<String> selectTakenSpots(){
+        ArrayList<String> spots = new ArrayList<String>();
+        String sql = "SELECT SpotNumber FROM TAKENSPOTS INNER JOIN SPOTS ON SPOTS.ID = TAKENSPOTS.SpotID;";
+        try (Connection conn = this.connect(); Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(sql)){
+            // loop through the result set
+            
+            while (rs.next()) {
+                spots.add(rs.getString("SpotNumber"));
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return spots;
     }
     
     /**
