@@ -4,10 +4,11 @@ package Garage;
 import Garage.CheckIn.*;
 import static Garage.CheckIn.a;
 import java.util.*;
+import javax.swing.JOptionPane;
 
 public class CheckOut extends javax.swing.JFrame {
     
-    
+    double totalCost = 0;
     
     /**
      * Creates new form CheckOut
@@ -29,17 +30,17 @@ public class CheckOut extends javax.swing.JFrame {
 
         lblDate = new javax.swing.JLabel();
         lblSubscriber = new javax.swing.JLabel();
-        txtDate1 = new javax.swing.JTextField();
+        txtDate = new javax.swing.JTextField();
         btnYes = new javax.swing.JButton();
         btnNo = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
-        btnPay = new javax.swing.JButton();
         lblName = new javax.swing.JLabel();
         txtName = new javax.swing.JTextField();
         btnSubmit = new javax.swing.JButton();
         lblTotalCost = new javax.swing.JLabel();
         txtPayment = new javax.swing.JTextField();
         lblPay = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -49,16 +50,26 @@ public class CheckOut extends javax.swing.JFrame {
         lblSubscriber.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         lblSubscriber.setText("Are you a subscriber?");
 
-        txtDate1.addActionListener(new java.awt.event.ActionListener() {
+        txtDate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtDate1ActionPerformed(evt);
+                txtDateActionPerformed(evt);
             }
         });
 
         btnYes.setText("YES");
+        btnYes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnYesActionPerformed(evt);
+            }
+        });
 
         btnNo.setText("NO");
         btnNo.setToolTipText("");
+        btnNo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNoActionPerformed(evt);
+            }
+        });
 
         btnBack.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         btnBack.setText("Back");
@@ -68,60 +79,64 @@ public class CheckOut extends javax.swing.JFrame {
             }
         });
 
-        btnPay.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        btnPay.setText("Pay");
-        btnPay.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPayActionPerformed(evt);
-            }
-        });
-
         lblName.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         lblName.setText("Name:");
 
+        btnSubmit.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         btnSubmit.setText("Submit");
+        btnSubmit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSubmitActionPerformed(evt);
+            }
+        });
 
         lblPay.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         lblPay.setText("Pay Here:");
+
+        jButton1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jButton1.setText("Pay");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(113, 113, 113)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(328, 328, 328)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblTotalCost, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(lblDate)
+                            .addComponent(lblName, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(39, 39, 39)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtDate, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
+                            .addComponent(txtName))
+                        .addGap(124, 124, 124)
+                        .addComponent(btnBack))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(113, 113, 113)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblPay, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
+                                .addGap(155, 155, 155)
+                                .addComponent(txtPayment, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblSubscriber)
+                                .addGap(32, 32, 32)
+                                .addComponent(btnYes))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(215, 215, 215)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(lblSubscriber)
-                                        .addGap(192, 192, 192)
-                                        .addComponent(btnYes))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(lblDate)
-                                            .addComponent(lblName, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(39, 39, 39)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(txtDate1, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
-                                            .addComponent(txtName))))
-                                .addGap(38, 38, 38)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnNo)
-                                    .addComponent(btnBack)))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(268, 268, 268)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtPayment, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnPay))))
+                                    .addComponent(lblTotalCost, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(17, 17, 17)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnNo)
+                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(351, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -132,7 +147,7 @@ public class CheckOut extends javax.swing.JFrame {
                         .addGap(67, 67, 67)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblDate)
-                            .addComponent(txtDate1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txtDate, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(77, 77, 77)
                         .addComponent(btnBack)))
@@ -142,24 +157,19 @@ public class CheckOut extends javax.swing.JFrame {
                     .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(btnSubmit)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(89, 89, 89)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnYes)
-                            .addComponent(btnNo)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(41, 41, 41)
-                        .addComponent(lblTotalCost)
-                        .addGap(52, 52, 52)
-                        .addComponent(lblSubscriber)))
-                .addGap(36, 36, 36)
+                .addGap(41, 41, 41)
+                .addComponent(lblTotalCost)
+                .addGap(52, 52, 52)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblSubscriber)
+                    .addComponent(btnYes)
+                    .addComponent(btnNo))
+                .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtPayment, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblPay))
-                .addGap(59, 59, 59)
-                .addComponent(btnPay)
-                .addContainerGap(244, Short.MAX_VALUE))
+                    .addComponent(lblPay)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(331, Short.MAX_VALUE))
         );
 
         pack();
@@ -171,27 +181,54 @@ public class CheckOut extends javax.swing.JFrame {
         new start().setVisible(true);
     }//GEN-LAST:event_btnBackActionPerformed
 
-    private void txtDate1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDate1ActionPerformed
+    private void txtDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDateActionPerformed
         // TODO add your handling code here:
-        int D1 =  Integer.parseInt(txtDate1.getText());
+        int D1 =  Integer.parseInt(txtDate.getText());
         
         
-    }//GEN-LAST:event_txtDate1ActionPerformed
+    }//GEN-LAST:event_txtDateActionPerformed
 
-    private void btnPayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPayActionPerformed
-        // TODO add your handling code here:
+    private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
+        String date1 = ""; String date2 = "";
+  
+        if(txtDate.getText().equals("") || txtName.getText().equals("")){
+            JOptionPane.showMessageDialog(this,"Please enter your information to check out");
+        }else{
+            
+            date1 = "";//PUT CALL FOR CHECKIN DATE HERE
+            date2 = txtDate.getText();
+            
+            CalculateCost costCalculator = new CalculateCost();
+            
+            totalCost = costCalculator.calculateTotalCost(date1, date2);
+            
+            lblTotalCost.setText("$" + totalCost);
+        }
+    }//GEN-LAST:event_btnSubmitActionPerformed
 
-        // remove spot from unavailable spots array
-        // Get spot that the name aligns with from data base, and remove that spot from leave arraylist
-        /*Iterator itr = CheckIn.leave.iterator();
-        while (itr.hasNext()) {
-            String x = (String)itr.next();
-            if (x.equals(CheckIn.selectedValue)){
-                itr.remove();
-            }
-        }*/
+    private void btnNoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNoActionPerformed
+        
+        JOptionPane.showMessageDialog(this,"Thank you for letting us know, we encourage you to subscribe during your next stay");
+    }//GEN-LAST:event_btnNoActionPerformed
 
-    }//GEN-LAST:event_btnPayActionPerformed
+    private void btnYesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnYesActionPerformed
+        JOptionPane.showMessageDialog(this,"Please enjoy 10% off your cost for today's stay");
+        totalCost *= 0.9;
+    }//GEN-LAST:event_btnYesActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        
+        String totalCostStr = String.valueOf(totalCost);
+        if(txtPayment.getText().equals(totalCostStr)){
+            txtPayment.setText("");
+            JOptionPane.showMessageDialog(this,"Thank you for staying at our parking garage, come again soon!");
+            dispose();
+            
+        }else{
+            txtPayment.setText("");
+            JOptionPane.showMessageDialog(this,"Please enter the proper amount for payment");
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -231,15 +268,15 @@ public class CheckOut extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnNo;
-    private javax.swing.JButton btnPay;
     private javax.swing.JButton btnSubmit;
     private javax.swing.JButton btnYes;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel lblDate;
     private javax.swing.JLabel lblName;
     private javax.swing.JLabel lblPay;
     private javax.swing.JLabel lblSubscriber;
     private javax.swing.JLabel lblTotalCost;
-    private javax.swing.JTextField txtDate1;
+    private javax.swing.JTextField txtDate;
     private javax.swing.JTextField txtName;
     private javax.swing.JTextField txtPayment;
     // End of variables declaration//GEN-END:variables
