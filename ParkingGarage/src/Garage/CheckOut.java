@@ -203,6 +203,8 @@ public class CheckOut extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this,"Please enter your information to check out");
         }else{
             
+            String name = txtName.getText(); // HERE'S THE NAME TO CROSS CHECK WITH THE DATABASE
+            
             date1 = "";//PUT CALL FOR CHECKIN DATE HERE
             date2 = txtDate.getText();
             
