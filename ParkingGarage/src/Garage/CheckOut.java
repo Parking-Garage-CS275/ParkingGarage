@@ -66,7 +66,7 @@ public class CheckOut extends javax.swing.JFrame {
         });
 
         btnBack.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        btnBack.setText("EXIT");
+        btnBack.setText("BACK");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBackActionPerformed(evt);
@@ -146,7 +146,7 @@ public class CheckOut extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(radYes)
                             .addComponent(radNo))))
-                .addContainerGap(525, Short.MAX_VALUE))
+                .addContainerGap(518, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -191,7 +191,7 @@ public class CheckOut extends javax.swing.JFrame {
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
         dispose();
-        //new start().setVisible(true);
+        new start().setVisible(true);
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void txtDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDateActionPerformed
@@ -238,6 +238,7 @@ public class CheckOut extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this,"Please enter the proper amount for payment");
         }
         dispose();
+        new start().setVisible(true);
     }//GEN-LAST:event_btnPayActionPerformed
 
     private void radYesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radYesActionPerformed

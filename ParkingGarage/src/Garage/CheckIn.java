@@ -74,6 +74,7 @@ public class CheckIn extends javax.swing.JFrame {
         }
         
         Connect db = new Connect();
+        //System.out.println(db.selectTakenSpots());
         ArrayList<String> takenSpots = db.selectTakenSpots();
         //System.out.println("Size: " + takenSpots.size());
         System.out.println(takenSpots.toString());
@@ -150,13 +151,11 @@ public class CheckIn extends javax.swing.JFrame {
         txtName = new javax.swing.JTextField();
         lblName = new javax.swing.JLabel();
         lblSelectedSpot = new javax.swing.JLabel();
-        combUnavailable = new javax.swing.JComboBox<>();
         lblFloor1Spots = new javax.swing.JLabel();
         lblFloor2Spots = new javax.swing.JLabel();
         lblFloor3Spots = new javax.swing.JLabel();
         lblFloor4Spots = new javax.swing.JLabel();
         lblFloor5Spots = new javax.swing.JLabel();
-        lblUnavailable = new javax.swing.JLabel();
         lblAvailable = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
@@ -234,15 +233,6 @@ public class CheckIn extends javax.swing.JFrame {
         lblName.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         lblName.setText("Name:");
 
-        combUnavailable.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        combUnavailable.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                combUnavailableActionPerformed(evt);
-            }
-        });
-
-        lblUnavailable.setText("Unavailable spots:");
-
         lblAvailable.setText("Available spots per floor:");
 
         jLabel1.setText("Selected Spot:");
@@ -279,33 +269,28 @@ public class CheckIn extends javax.swing.JFrame {
                                 .addComponent(lblAvailable)))
                         .addGap(26, 26, 26)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblFloor1Spots)
+                            .addComponent(combSpot1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(24, 24, 24)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblFloor2Spots)
+                            .addComponent(combSpot2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(26, 26, 26)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblFloor3Spots)
+                            .addComponent(combSpot3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblUnavailable)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(combUnavailable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblFloor1Spots)
-                                    .addComponent(combSpot1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(24, 24, 24)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblFloor2Spots)
-                                    .addComponent(combSpot2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(26, 26, 26)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblFloor3Spots)
-                                    .addComponent(combSpot3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(33, 33, 33)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(lblFloor4Spots)
-                                        .addGap(92, 92, 92)
-                                        .addComponent(lblFloor5Spots))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(combSpot5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(combSpot4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGap(46, 46, 46))
+                                .addComponent(lblFloor4Spots)
+                                .addGap(92, 92, 92)
+                                .addComponent(lblFloor5Spots))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(combSpot5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(combSpot4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(55, 55, 55))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnBack)
                         .addGap(23, 23, 23)
@@ -341,21 +326,14 @@ public class CheckIn extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(2, 2, 2)
                         .addComponent(lblSpot, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblUnavailable)
-                            .addComponent(combUnavailable, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblSelectedSpot, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel1))
-                        .addGap(15, 15, 15)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnBack)
-                            .addComponent(btnCheckIn))))
+                .addGap(12, 12, 12)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblSelectedSpot, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1))
+                .addGap(15, 15, 15)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnBack)
+                    .addComponent(btnCheckIn))
                 .addContainerGap(29, Short.MAX_VALUE))
         );
 
@@ -379,9 +357,7 @@ public class CheckIn extends javax.swing.JFrame {
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void btnCheckInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheckInActionPerformed
-        // TODO add your handling code here:
-        
-        // TODO add your handling code here:
+
         // get the selected spot
         selectedValue = lblSelectedSpot.getText();
         // split the spot into the floor and number, then fill the spot in the 2D array
@@ -393,7 +369,6 @@ public class CheckIn extends javax.swing.JFrame {
         String name = txtName.getText();
         String fname = name.substring(0, name.indexOf(' '));
         String lname = name.substring(name.indexOf(' '));
-        //TODO: ACCOUNTS MULITPLYING 
         String AccountID = "";
         if(db.selectAccountID(fname, lname).equals("0")){
             db.insertAccount(fname, lname, 0);
@@ -405,7 +380,10 @@ public class CheckIn extends javax.swing.JFrame {
         }
         String date = txtDate.getText();
         db.updateCheckInTime(selectedValue, date);
-        db.insertTakenSpot(db.selectAccountID(fname, lname),db.selectSpotID(selectedValue));
+        System.out.println(selectedValue);
+        String SpotID = db.selectSpotID(selectedValue);
+        db.insertTakenSpot(SpotID, AccountID);
+        db.selectAllTakenSpots();
         //jComboBox5.setModel(new javax.swing.DefaultComboBoxModel(e.toArray()));
         
         // floorInt and spotInt are so that we can remove the chosen spot from the display combob box
@@ -533,14 +511,14 @@ public class CheckIn extends javax.swing.JFrame {
         Collections.sort(leave);  
         lblSelectedSpot.setText(selectedValue);
         
-        combUnavailable.setModel(new javax.swing.DefaultComboBoxModel(leave.toArray()));
+        //combUnavailable.setModel(new javax.swing.DefaultComboBoxModel(leave.toArray()));
         //**ADD CODE FOR RECEIVING THE CHECK IN TIME/DATE**
         
         txtDate.setText("");
         JOptionPane.showMessageDialog(this, "You have been checked in, please park in spot " + lblSelectedSpot.getText() + ".");
-        //new start().setVisible(true);
-        dispose();
         
+        dispose();
+        new start().setVisible(true);
     }//GEN-LAST:event_btnCheckInActionPerformed
 
     private void combSpot1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combSpot1ActionPerformed
@@ -574,10 +552,6 @@ public class CheckIn extends javax.swing.JFrame {
     private void txtNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtNameActionPerformed
-
-    private void combUnavailableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combUnavailableActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_combUnavailableActionPerformed
 
     /**
      * @param args the command line arguments
@@ -622,7 +596,6 @@ public class CheckIn extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> combSpot3;
     private javax.swing.JComboBox<String> combSpot4;
     private javax.swing.JComboBox<String> combSpot5;
-    private javax.swing.JComboBox<String> combUnavailable;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lblAvailable;
     private javax.swing.JLabel lblDate;
@@ -634,7 +607,6 @@ public class CheckIn extends javax.swing.JFrame {
     private javax.swing.JLabel lblName;
     private javax.swing.JLabel lblSelectedSpot;
     private javax.swing.JLabel lblSpot;
-    private javax.swing.JLabel lblUnavailable;
     private javax.swing.JTextField txtDate;
     private javax.swing.JTextField txtName;
     // End of variables declaration//GEN-END:variables

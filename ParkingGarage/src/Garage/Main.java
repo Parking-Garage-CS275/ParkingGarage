@@ -9,8 +9,8 @@ public class Main {
         //database.createAccountTable();
         //database.createTakenSpotTable();
         new start().setVisible(true);
-        database.selectAllAccounts();
-        database.selectAllSpots();
+        //database.selectAllAccounts();
+        //database.selectAllSpots();
         database.selectAllTakenSpots();
     }
 }
