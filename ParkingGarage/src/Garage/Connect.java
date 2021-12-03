@@ -574,7 +574,6 @@ public class Connect {
         String sql = "SELECT SpotNumber FROM TAKENSPOTS INNER JOIN SPOTS ON SPOTS.ID = TAKENSPOTS.SpotID;";
         try (Connection conn = this.connect(); Statement stmt = conn.createStatement(); ResultSet rs = stmt.executeQuery(sql)){
             // loop through the result set
-            
             while (rs.next()) {
                 spots.add(rs.getString("SpotNumber"));
             }
@@ -645,6 +644,20 @@ public class Connect {
             System.out.println(e.getMessage());
         }
         return AccountID;
+    }
+    
+    public String selectTakenSpotsSpotNum(String AccountID){
+        String SpotNum = "";
+        
+        String sql = "SELECT SpotNumber FROM TAKENSPOTS INNER JOIN SPOTS ON SpotID = SPOTS.ID WHERE AccountID = ?";
+        try(Connection conn = this.connect(); PreparedStatement pstmt = conn.prepareStatement(sql)){
+            pstmt.setString(1, AccountID);
+            ResultSet rs = pstmt.executeQuery();
+            SpotNum = rs.getString("SpotNumber");
+        } catch (SQLException e){
+            System.out.println(e.getMessage());
+        }
+        return SpotNum;
     }
     
     /**

@@ -1,6 +1,7 @@
 package Garage;
 
 
+import static Garage.CheckIn.database;
 import java.util.*;
 import javax.swing.JOptionPane;
 
@@ -65,7 +66,7 @@ public class CheckOut extends javax.swing.JFrame {
         });
 
         btnBack.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        btnBack.setText("Back");
+        btnBack.setText("EXIT");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBackActionPerformed(evt);
@@ -190,7 +191,7 @@ public class CheckOut extends javax.swing.JFrame {
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // TODO add your handling code here:
         dispose();
-        new start().setVisible(true);
+        //new start().setVisible(true);
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void txtDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDateActionPerformed
@@ -206,11 +207,15 @@ public class CheckOut extends javax.swing.JFrame {
         if(txtDate.getText().equals("") || txtName.getText().equals("")){
             JOptionPane.showMessageDialog(this,"Please enter your information to check out");
         }else{
-            
+            Connect db = database();
             String name = txtName.getText(); // HERE'S THE NAME TO CROSS CHECK WITH THE DATABASE
-            
-            date1 = "";//PUT CALL FOR CHECKIN DATE HERE
+            String fname = name.substring(0, name.indexOf(' '));
+            String lname = name.substring(name.indexOf(' '));
+            String spotnum = db.selectTakenSpotsSpotNum(db.selectAccountID(fname, lname));
+            System.out.println(spotnum);
+            date1 = db.selectCheckInTime(spotnum);//PUT CALL FOR CHECKIN DATE HERE
             date2 = txtDate.getText();
+            db.deleteTakenSpots(spotnum);
             
             CalculateCost costCalculator = new CalculateCost();
             
@@ -232,6 +237,7 @@ public class CheckOut extends javax.swing.JFrame {
             txtPayment.setText("");
             JOptionPane.showMessageDialog(this,"Please enter the proper amount for payment");
         }
+        dispose();
     }//GEN-LAST:event_btnPayActionPerformed
 
     private void radYesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radYesActionPerformed
