@@ -384,7 +384,14 @@ public class CheckIn extends javax.swing.JFrame {
         String fname = name.substring(0, name.indexOf(' '));
         String lname = name.substring(name.indexOf(' '));
         //TODO: ACCOUNTS MULITPLYING 
-        
+        String AccountID = "";
+        if(db.selectAccountID(fname, lname).equals("0")){
+            db.insertAccount(fname, lname, 0);
+            AccountID = db.selectAccountID(fname, lname);
+        }
+        else{
+            AccountID = db.selectAccountID(fname, lname);
+        }
         db.insertAccount(fname, lname, 0);
         String date = txtDate.getText();
         db.updateCheckInTime(selectedValue, date);
