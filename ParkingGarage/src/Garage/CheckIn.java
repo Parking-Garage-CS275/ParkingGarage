@@ -400,9 +400,9 @@ public class CheckIn extends javax.swing.JFrame {
             AccountID = db.selectAccountID(fname, lname);
         }
         else{
+            db.insertAccount(fname, lname, 0);
             AccountID = db.selectAccountID(fname, lname);
         }
-        db.insertAccount(fname, lname, 0);
         String date = txtDate.getText();
         db.updateCheckInTime(selectedValue, date);
         db.insertTakenSpot(db.selectAccountID(fname, lname),db.selectSpotID(selectedValue));
