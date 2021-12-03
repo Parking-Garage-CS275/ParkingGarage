@@ -155,7 +155,7 @@ public class Connect {
             ID = Integer.toString(rs.getInt("id"));
             
         } catch (SQLException e){
-            return "";
+            return "0";
         }
         return ID;
     }
