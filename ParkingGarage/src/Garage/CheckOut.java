@@ -39,8 +39,6 @@ public class CheckOut extends javax.swing.JFrame {
         lblDate = new javax.swing.JLabel();
         lblSubscriber = new javax.swing.JLabel();
         txtDate = new javax.swing.JTextField();
-        btnYes = new javax.swing.JButton();
-        btnNo = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
         lblName = new javax.swing.JLabel();
         txtName = new javax.swing.JTextField();
@@ -48,7 +46,9 @@ public class CheckOut extends javax.swing.JFrame {
         lblTotalCost = new javax.swing.JLabel();
         txtPayment = new javax.swing.JTextField();
         lblPay = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnPay = new javax.swing.JButton();
+        radYes = new javax.swing.JRadioButton();
+        radNo = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -64,22 +64,7 @@ public class CheckOut extends javax.swing.JFrame {
             }
         });
 
-        btnYes.setText("YES");
-        btnYes.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnYesActionPerformed(evt);
-            }
-        });
-
-        btnNo.setText("NO");
-        btnNo.setToolTipText("");
-        btnNo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNoActionPerformed(evt);
-            }
-        });
-
-        btnBack.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        btnBack.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         btnBack.setText("Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -90,7 +75,7 @@ public class CheckOut extends javax.swing.JFrame {
         lblName.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         lblName.setText("Name:");
 
-        btnSubmit.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnSubmit.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         btnSubmit.setText("Submit");
         btnSubmit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -101,11 +86,27 @@ public class CheckOut extends javax.swing.JFrame {
         lblPay.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         lblPay.setText("Pay Here:");
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jButton1.setText("Pay");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnPay.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        btnPay.setText("Pay");
+        btnPay.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnPayActionPerformed(evt);
+            }
+        });
+
+        radYes.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        radYes.setText("Yes");
+        radYes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radYesActionPerformed(evt);
+            }
+        });
+
+        radNo.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        radNo.setText("No");
+        radNo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radNoActionPerformed(evt);
             }
         });
 
@@ -114,70 +115,73 @@ public class CheckOut extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(113, 113, 113)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblDate)
-                            .addComponent(lblName, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(39, 39, 39)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtDate, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
-                            .addComponent(txtName))
-                        .addGap(124, 124, 124)
-                        .addComponent(btnBack))
+                        .addGap(19, 19, 19)
+                        .addComponent(lblName, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lblPay, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtPayment, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(19, 19, 19)
+                        .addComponent(lblDate)
+                        .addGap(27, 27, 27)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblPay, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(155, 155, 155)
-                                .addComponent(txtPayment, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblSubscriber)
-                                .addGap(32, 32, 32)
-                                .addComponent(btnYes))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(215, 215, 215)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblTotalCost, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(btnSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(17, 17, 17)
+                                .addComponent(txtDate, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(76, 76, 76)
+                                .addComponent(btnBack))
+                            .addComponent(lblTotalCost, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(btnPay, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btnSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lblSubscriber)
+                        .addGap(41, 41, 41)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnNo)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(351, Short.MAX_VALUE))
+                            .addComponent(radYes)
+                            .addComponent(radNo))))
+                .addContainerGap(525, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(67, 67, 67)
+                        .addGap(21, 21, 21)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblDate)
                             .addComponent(txtDate, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(77, 77, 77)
+                        .addGap(26, 26, 26)
                         .addComponent(btnBack)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblName, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(btnSubmit)
-                .addGap(41, 41, 41)
-                .addComponent(lblTotalCost)
-                .addGap(52, 52, 52)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblSubscriber)
-                    .addComponent(btnYes)
-                    .addComponent(btnNo))
-                .addGap(33, 33, 33)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtPayment, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblPay)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(331, Short.MAX_VALUE))
+                .addGap(49, 49, 49)
+                .addComponent(lblTotalCost, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(48, 48, 48)
+                        .addComponent(lblSubscriber)
+                        .addGap(61, 61, 61)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(lblPay)
+                            .addComponent(txtPayment, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnPay)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(33, 33, 33)
+                        .addComponent(radYes)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(radNo)))
+                .addContainerGap(338, Short.MAX_VALUE))
         );
 
         pack();
@@ -216,17 +220,7 @@ public class CheckOut extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnSubmitActionPerformed
 
-    private void btnNoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNoActionPerformed
-        
-        JOptionPane.showMessageDialog(this,"Thank you for letting us know, we encourage you to subscribe during your next stay");
-    }//GEN-LAST:event_btnNoActionPerformed
-
-    private void btnYesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnYesActionPerformed
-        JOptionPane.showMessageDialog(this,"Please enjoy 10% off your cost for today's stay");
-        totalCost *= 0.9;
-    }//GEN-LAST:event_btnYesActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnPayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPayActionPerformed
         
         String totalCostStr = String.valueOf(totalCost);
         if(txtPayment.getText().equals(totalCostStr)){
@@ -238,7 +232,16 @@ public class CheckOut extends javax.swing.JFrame {
             txtPayment.setText("");
             JOptionPane.showMessageDialog(this,"Please enter the proper amount for payment");
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnPayActionPerformed
+
+    private void radYesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radYesActionPerformed
+        JOptionPane.showMessageDialog(this,"Please enjoy 10% off your cost for today's stay");
+        totalCost *= 0.9;
+    }//GEN-LAST:event_radYesActionPerformed
+
+    private void radNoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radNoActionPerformed
+        JOptionPane.showMessageDialog(this,"Thank you for letting us know, we encourage you to subscribe during your next stay");
+    }//GEN-LAST:event_radNoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -277,15 +280,15 @@ public class CheckOut extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
-    private javax.swing.JButton btnNo;
+    private javax.swing.JButton btnPay;
     private javax.swing.JButton btnSubmit;
-    private javax.swing.JButton btnYes;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel lblDate;
     private javax.swing.JLabel lblName;
     private javax.swing.JLabel lblPay;
     private javax.swing.JLabel lblSubscriber;
     private javax.swing.JLabel lblTotalCost;
+    private javax.swing.JRadioButton radNo;
+    private javax.swing.JRadioButton radYes;
     private javax.swing.JTextField txtDate;
     private javax.swing.JTextField txtName;
     private javax.swing.JTextField txtPayment;
