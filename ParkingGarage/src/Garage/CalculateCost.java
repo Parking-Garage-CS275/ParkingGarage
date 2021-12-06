@@ -43,6 +43,10 @@ public class CalculateCost {
         }
         double totalCost = differenceInMin * 0.02;
         
+        totalCost = totalCost * Math.pow(10, 2);
+        totalCost = Math.floor(totalCost);
+        totalCost = totalCost / Math.pow(10, 2);
+        
         return totalCost;
     }
     
