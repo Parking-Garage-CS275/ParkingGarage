@@ -9,7 +9,7 @@ public class Main {
         database.dropTable("TAKENSPOTS");
         database.createAccountTable();
         database.createTakenSpotTable();
-*/
+        */
         new start().setVisible(true);
         //database.selectAllAccounts();
         //database.selectAllSpots();

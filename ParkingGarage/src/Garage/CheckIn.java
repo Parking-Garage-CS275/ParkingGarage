@@ -105,11 +105,11 @@ public class CheckIn extends javax.swing.JFrame {
         //TODO: UNAVIABLE SPOTS COMBO BOX
         
         
-        lblFloor1Spots.setText(String.valueOf(counterA));
-        lblFloor2Spots.setText(String.valueOf(counterB));
-        lblFloor3Spots.setText(String.valueOf(counterC));
-        lblFloor4Spots.setText(String.valueOf(counterD));
-        lblFloor5Spots.setText(String.valueOf(counterE));
+        lblFloor1Spots.setText(String.valueOf(a.size()));
+        lblFloor2Spots.setText(String.valueOf(b.size()));
+        lblFloor3Spots.setText(String.valueOf(c.size()));
+        lblFloor4Spots.setText(String.valueOf(d.size()));
+        lblFloor5Spots.setText(String.valueOf(e.size()));
         
         
         // display the spots in the combo boxes
@@ -182,7 +182,7 @@ public class CheckIn extends javax.swing.JFrame {
         });
 
         btnBack.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
-        btnBack.setText("EXIT");
+        btnBack.setText("BACK");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBackActionPerformed(evt);
@@ -365,7 +365,7 @@ public class CheckIn extends javax.swing.JFrame {
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         dispose();
-        //new start().setVisible(true);
+        new start().setVisible(true);
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void btnCheckInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheckInActionPerformed
@@ -379,10 +379,16 @@ public class CheckIn extends javax.swing.JFrame {
         Connect db = database();
         
         String name = txtName.getText();
-        String fname = name.substring(0, name.indexOf(' '));
-        String lname = name.substring(name.indexOf(' '));
+        String fname = "";
+        String lname = "";
+        try {
+            fname = name.substring(0, name.indexOf(' '));
+            lname = name.substring(name.indexOf(' '));
+        } catch (Exception e){
+            fname = name;
+        }
         String AccountID = "";
-        if(db.selectAccountID(fname, lname).equals("0")){
+        if(db.selectAccountID(fname, lname).equals("0")){ //meaning account is new
             db.insertAccount(fname, lname, 0);
             AccountID = db.selectAccountID(fname, lname);
         }
@@ -392,7 +398,7 @@ public class CheckIn extends javax.swing.JFrame {
         }
         String date = txtDate.getText();
         db.updateCheckInTime(selectedValue, date);
-        System.out.println(selectedValue);
+        //System.out.println(selectedValue);
         String SpotID = db.selectSpotID(selectedValue);
         db.insertTakenSpot(SpotID, AccountID);
         db.selectAllTakenSpots();
@@ -470,7 +476,7 @@ public class CheckIn extends javax.swing.JFrame {
                         String x = (String)itr.next();
                         if (x.equals(selectedValue)){
                             itr.remove();
-                            counterA--;
+                            //counterA--;
                             lblFloor1Spots.setText(String.valueOf(counterA));
                         }
                     }       combSpot1.setModel(new javax.swing.DefaultComboBoxModel(a.toArray()));
@@ -481,7 +487,7 @@ public class CheckIn extends javax.swing.JFrame {
                         String x = (String)itr.next();
                         if (x.equals(selectedValue)){
                             itr.remove();
-                            counterB--;
+                            //counterB--;
                             lblFloor2Spots.setText(String.valueOf(counterB));
                         }
                     }       combSpot2.setModel(new javax.swing.DefaultComboBoxModel(b.toArray()));
@@ -492,7 +498,7 @@ public class CheckIn extends javax.swing.JFrame {
                         String x = (String)itr.next();
                         if (x.equals(selectedValue)){
                             itr.remove();
-                            counterC--;
+                            //counterC--;
                             lblFloor3Spots.setText(String.valueOf(counterC));
                         }
                     }       combSpot3.setModel(new javax.swing.DefaultComboBoxModel(c.toArray()));
@@ -503,7 +509,7 @@ public class CheckIn extends javax.swing.JFrame {
                         String x = (String)itr.next();
                         if (x.equals(selectedValue)){
                             itr.remove();
-                            counterD--;
+                            //counterD--;
                             lblFloor4Spots.setText(String.valueOf(counterD));
                         }
                     }       combSpot5.setModel(new javax.swing.DefaultComboBoxModel(d.toArray()));
@@ -514,7 +520,7 @@ public class CheckIn extends javax.swing.JFrame {
                         String x = (String)itr.next();
                         if (x.equals(selectedValue)){
                             itr.remove();
-                            counterE--;
+                            //counterE--;
                             lblFloor5Spots.setText(String.valueOf(counterE));
                         }
                     }       combSpot4.setModel(new javax.swing.DefaultComboBoxModel(e.toArray()));
