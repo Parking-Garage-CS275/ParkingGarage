@@ -229,8 +229,14 @@ public class CheckOut extends javax.swing.JFrame {
         }else{
             Connect db = database();
             String name = txtName.getText(); // HERE'S THE NAME TO CROSS CHECK WITH THE DATABASE
-            String fname = name.substring(0, name.indexOf(' '));
-            String lname = name.substring(name.indexOf(' '));
+            String fname = "";
+            String lname = "";
+            try {
+                fname = name.substring(0, name.indexOf(' '));
+                lname = name.substring(name.indexOf(' '));
+            } catch (Exception e){
+                fname = name;
+            }
             String spotnum = db.selectTakenSpotsSpotNum(db.selectAccountID(fname, lname));
             System.out.println(spotnum);
             date1 = db.selectCheckInTime(spotnum);//PUT CALL FOR CHECKIN DATE HERE
