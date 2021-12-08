@@ -16,7 +16,7 @@ public class CheckOut extends javax.swing.JFrame {
         database.createAccountTable();    
         database.createSpotsTable();
         database.createTakenSpotTable();
-        database.selectAllSpots();
+        //database.selectAllSpots();
         return database;
     }
     
@@ -25,7 +25,7 @@ public class CheckOut extends javax.swing.JFrame {
     String date1 = "";
     String date2 = "";
     final DecimalFormat df = new DecimalFormat("0.00");
-    boolean subscriber;
+    boolean subscriber = false;
     
 
     /**
@@ -246,7 +246,7 @@ public class CheckOut extends javax.swing.JFrame {
                 fname = name;
             }
             String spotnum = db.selectTakenSpotsSpotNum(db.selectAccountID(fname, lname));
-            System.out.println(spotnum);
+            //System.out.println(spotnum);
             date1 = db.selectCheckInTime(spotnum);//PUT CALL FOR CHECKIN DATE HERE
             date2 = txtDate.getText();
             db.deleteTakenSpots(spotnum);
@@ -271,8 +271,8 @@ public class CheckOut extends javax.swing.JFrame {
             txtPayment.setText("");
             JOptionPane.showMessageDialog(this,"Thank you for staying at our parking garage, come again soon!");
             //check in date, checkout date, rate, total charged
-            
-            if(subscriber = true){
+            //System.out.println(subscriber);
+            if(subscriber == true){
                 JOptionPane.showMessageDialog(this, "Check In Date: " + date1 + "\n"
                                                 + "Check Out Date: " + date2 + "\n" 
                                                 + "Rate: $0.02 per minute \n" 

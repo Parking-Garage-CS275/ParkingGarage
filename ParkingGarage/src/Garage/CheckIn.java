@@ -13,7 +13,7 @@ public class CheckIn extends javax.swing.JFrame {
         database.createAccountTable();    
         database.createSpotsTable();
         database.createTakenSpotTable();
-        database.selectAllSpots();
+        //database.selectAllSpots();
         return database;
     }
     
@@ -77,7 +77,7 @@ public class CheckIn extends javax.swing.JFrame {
         //System.out.println(db.selectTakenSpots());
         ArrayList<String> takenSpots = db.selectTakenSpots();
         //System.out.println("Size: " + takenSpots.size());
-        System.out.println(takenSpots.toString());
+        //System.out.println(takenSpots.toString());
         for(int i = 0; i < takenSpots.size(); i++){
             String floorLetter = takenSpots.get(i).substring(0, 1);
             String spotNum = takenSpots.get(i).substring(1);
@@ -401,7 +401,7 @@ public class CheckIn extends javax.swing.JFrame {
         //System.out.println(selectedValue);
         String SpotID = db.selectSpotID(selectedValue);
         db.insertTakenSpot(SpotID, AccountID);
-        db.selectAllTakenSpots();
+        //db.selectAllTakenSpots();
         //jComboBox5.setModel(new javax.swing.DefaultComboBoxModel(e.toArray()));
         
         // floorInt and spotInt are so that we can remove the chosen spot from the display combob box

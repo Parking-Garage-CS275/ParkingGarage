@@ -13,6 +13,6 @@ public class Main {
         new start().setVisible(true);
         //database.selectAllAccounts();
         //database.selectAllSpots();
-        database.selectAllTakenSpots();
+        //database.selectAllTakenSpots();
     }
 }
