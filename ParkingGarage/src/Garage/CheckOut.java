@@ -4,6 +4,8 @@ package Garage;
 import static Garage.CheckIn.database;
 import java.util.*;
 import javax.swing.JOptionPane;
+import java.text.DecimalFormat;
+import java.lang.*;
 
 public class CheckOut extends javax.swing.JFrame {
     
@@ -17,7 +19,11 @@ public class CheckOut extends javax.swing.JFrame {
         return database;
     }
     
-    double totalCost = 0;
+    public double totalCost = 0;
+    String date1 = "";
+    String date2 = "";
+    final DecimalFormat df = new DecimalFormat("0.00");
+    
 
     /**
      * Creates new form CheckOut
@@ -214,7 +220,7 @@ public class CheckOut extends javax.swing.JFrame {
     }//GEN-LAST:event_txtDateActionPerformed
 
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
-        String date1 = ""; String date2 = "";
+        //String date1 = ""; String date2 = "";
   
         if(txtDate.getText().equals("") || txtName.getText().equals("")){
             JOptionPane.showMessageDialog(this,"Please enter your information to check out");
@@ -233,30 +239,41 @@ public class CheckOut extends javax.swing.JFrame {
             
             totalCost = costCalculator.calculateTotalCost(date1, date2);
             
-            lblTotalCost.setText("$" + totalCost);
+            
+            lblTotalCost.setText("$" + df.format(totalCost));
         }
     }//GEN-LAST:event_btnSubmitActionPerformed
 
     private void btnPayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPayActionPerformed
         
+        
         String totalCostStr = String.valueOf(totalCost);
+        
+        
+    
         if(txtPayment.getText().equals(totalCostStr)){
             txtPayment.setText("");
             JOptionPane.showMessageDialog(this,"Thank you for staying at our parking garage, come again soon!");
+            //check in date, checkout date, rate, total charged
+            JOptionPane.showMessageDialog(this, "Check In Date: " + date1 + "\n"
+                                                + "Check Out Date: " + date2 + "\n" 
+                                                + "Rate: $0.02 per minute \n" 
+                                                + "Total Charged: $" + totalCost);
             dispose();
+            new start().setVisible(true);
             
         }else{
             txtPayment.setText("");
             JOptionPane.showMessageDialog(this,"Please enter the proper amount for payment");
         }
-        dispose();
-        new start().setVisible(true);
+        
     }//GEN-LAST:event_btnPayActionPerformed
 
     private void radYesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radYesActionPerformed
         JOptionPane.showMessageDialog(this,"Please enjoy 10% off your cost for today's stay");
         totalCost *= 0.9;
-        lblDiscountCost.setText("Discounted Price: " + totalCost);
+        totalCost = Math.round(totalCost*100.0)/100.0;
+        lblDiscountCost.setText("Discounted Price: $" + df.format(totalCost));
     }//GEN-LAST:event_radYesActionPerformed
 
     private void radNoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radNoActionPerformed
