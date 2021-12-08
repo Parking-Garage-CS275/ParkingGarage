@@ -5,7 +5,10 @@ import static Garage.CheckIn.database;
 import java.util.*;
 import javax.swing.JOptionPane;
 import java.text.DecimalFormat;
+<<<<<<< Updated upstream
 import java.lang.*;
+=======
+>>>>>>> Stashed changes
 
 public class CheckOut extends javax.swing.JFrame {
     
@@ -19,7 +22,11 @@ public class CheckOut extends javax.swing.JFrame {
         return database;
     }
     
+<<<<<<< Updated upstream
     public double totalCost = 0;
+=======
+    double totalCost = 0;
+>>>>>>> Stashed changes
     String date1 = "";
     String date2 = "";
     final DecimalFormat df = new DecimalFormat("0.00");
@@ -272,8 +279,12 @@ public class CheckOut extends javax.swing.JFrame {
     private void radYesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radYesActionPerformed
         JOptionPane.showMessageDialog(this,"Please enjoy 10% off your cost for today's stay");
         totalCost *= 0.9;
+<<<<<<< Updated upstream
         totalCost = Math.round(totalCost*100.0)/100.0;
         lblDiscountCost.setText("Discounted Price: $" + df.format(totalCost));
+=======
+        lblDiscountCost.setText("Discounted Price: " + df.format(totalCost));
+>>>>>>> Stashed changes
     }//GEN-LAST:event_radYesActionPerformed
 
     private void radNoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radNoActionPerformed
