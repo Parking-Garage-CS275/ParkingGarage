@@ -25,6 +25,7 @@ public class CheckOut extends javax.swing.JFrame {
     String date1 = "";
     String date2 = "";
     final DecimalFormat df = new DecimalFormat("0.00");
+    boolean subscriber;
     
 
     /**
@@ -52,7 +53,7 @@ public class CheckOut extends javax.swing.JFrame {
         lblName = new javax.swing.JLabel();
         txtName = new javax.swing.JTextField();
         btnSubmit = new javax.swing.JButton();
-        lblTotalCost = new javax.swing.JLabel();
+        lblSubCost = new javax.swing.JLabel();
         txtPayment = new javax.swing.JTextField();
         lblPay = new javax.swing.JLabel();
         btnPay = new javax.swing.JButton();
@@ -60,6 +61,7 @@ public class CheckOut extends javax.swing.JFrame {
         radNo = new javax.swing.JRadioButton();
         jLabel1 = new javax.swing.JLabel();
         lblDiscountCost = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -124,6 +126,9 @@ public class CheckOut extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setText("(dd-MM-yyyy HH:mm)");
 
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel2.setText("Final Cost: ");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -154,15 +159,16 @@ public class CheckOut extends javax.swing.JFrame {
                                 .addGap(63, 63, 63)
                                 .addComponent(btnPay, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(btnSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblTotalCost, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(lblSubCost, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(lblDiscountCost, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(lblPay, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txtPayment, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblPay, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblDiscountCost, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtPayment, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(518, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -185,14 +191,16 @@ public class CheckOut extends javax.swing.JFrame {
                         .addGap(8, 8, 8)
                         .addComponent(jLabel1)))
                 .addGap(37, 37, 37)
-                .addComponent(lblTotalCost, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblSubCost, javax.swing.GroupLayout.PREFERRED_SIZE, 13, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(48, 48, 48)
                         .addComponent(lblSubscriber)
-                        .addGap(18, 18, 18)
-                        .addComponent(lblDiscountCost, javax.swing.GroupLayout.PREFERRED_SIZE, 12, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addGap(19, 19, 19)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel2)
+                            .addComponent(lblDiscountCost, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(17, 17, 17)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblPay)
                             .addComponent(txtPayment, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -202,7 +210,7 @@ public class CheckOut extends javax.swing.JFrame {
                         .addComponent(radYes)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(radNo)))
-                .addContainerGap(356, Short.MAX_VALUE))
+                .addContainerGap(351, Short.MAX_VALUE))
         );
 
         pack();
@@ -246,29 +254,40 @@ public class CheckOut extends javax.swing.JFrame {
             CalculateCost costCalculator = new CalculateCost();
             
             totalCost = costCalculator.calculateTotalCost(date1, date2);
+            totalCost = Math.round(totalCost*100.0)/100.0;
             
-            
-            lblTotalCost.setText("$" + df.format(totalCost));
+            lblSubCost.setText("Cost: $" + df.format(totalCost));
         }
     }//GEN-LAST:event_btnSubmitActionPerformed
 
     private void btnPayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPayActionPerformed
         
         
-        String totalCostStr = String.valueOf(totalCost);
+        //String totalCostStr = String.valueOf(totalCost);
         
-        
+        String totalCostStr = lblDiscountCost.getText();
     
         if(txtPayment.getText().equals(totalCostStr)){
             txtPayment.setText("");
             JOptionPane.showMessageDialog(this,"Thank you for staying at our parking garage, come again soon!");
             //check in date, checkout date, rate, total charged
-            JOptionPane.showMessageDialog(this, "Check In Date: " + date1 + "\n"
+            
+            if(subscriber = true){
+                JOptionPane.showMessageDialog(this, "Check In Date: " + date1 + "\n"
                                                 + "Check Out Date: " + date2 + "\n" 
                                                 + "Rate: $0.02 per minute \n" 
-                                                + "Total Charged: $" + totalCost);
+                                                + "10% Discount Applied \n"
+                                                + "Total Charged: $" + df.format(totalCost));
+            }else{
+                JOptionPane.showMessageDialog(this, "Check In Date: " + date1 + "\n"
+                                                + "Check Out Date: " + date2 + "\n" 
+                                                + "Rate: $0.02 per minute \n" 
+                                                + "Total Charged: $" + df.format(totalCost));
+            }
+            
+            
             dispose();
-            new start().setVisible(true);
+            //new start().setVisible(true);  RIGHT NOW THIS DOESN'T WORK WITH THE AVAILABLE SPOTS PER FLOOR LABELS
             
         }else{
             txtPayment.setText("");
@@ -279,15 +298,18 @@ public class CheckOut extends javax.swing.JFrame {
 
     private void radYesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radYesActionPerformed
         JOptionPane.showMessageDialog(this,"Please enjoy 10% off your cost for today's stay");
+        subscriber = true;
         totalCost *= 0.9;
 
         totalCost = Math.round(totalCost*100.0)/100.0;
-        lblDiscountCost.setText("Discounted Price: $" + df.format(totalCost));
+        lblDiscountCost.setText(df.format(totalCost));
 
     }//GEN-LAST:event_radYesActionPerformed
 
     private void radNoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radNoActionPerformed
         JOptionPane.showMessageDialog(this,"Thank you for letting us know, we encourage you to subscribe during your next stay");
+        subscriber = false;
+        lblDiscountCost.setText(df.format(totalCost));
     }//GEN-LAST:event_radNoActionPerformed
 
     /**
@@ -330,12 +352,13 @@ public class CheckOut extends javax.swing.JFrame {
     private javax.swing.JButton btnPay;
     private javax.swing.JButton btnSubmit;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel lblDate;
     private javax.swing.JLabel lblDiscountCost;
     private javax.swing.JLabel lblName;
     private javax.swing.JLabel lblPay;
+    private javax.swing.JLabel lblSubCost;
     private javax.swing.JLabel lblSubscriber;
-    private javax.swing.JLabel lblTotalCost;
     private javax.swing.JRadioButton radNo;
     private javax.swing.JRadioButton radYes;
     private javax.swing.JTextField txtDate;
